@@ -1,0 +1,12 @@
+shardingRule:
+  tables:
+    gallant_order:
+      actualDataNodes: ds${0..1}.gallant_order${0..1}
+      databaseStrategy:
+        inline:
+          shardingColumn: user_id
+          algorithmExpression: ds${user_id % 2}
+      tableStrategy:
+        inline:
+          shardingColumn: city_id
+          algorithmExpression: gallant_order${city_id % 2}
